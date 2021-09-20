@@ -36,8 +36,20 @@ export const Sbutton = styled(Button)`
         background-color: #EFEFEF;
         border: none;
     }
+    &.logout {
+        border-radius: 0;
+        width: auto;
+        height: auto;
+        background-color: transparent;
+        border: none;
+        &:hover {
+            border: none;
+        }
+        &:active {
+            border: none;
+        }
+    }
 `  
-
 export const Snav = styled(Nav)`
     &.navbar {
         border-bottom: 2px solid rgba(0, 0, 0, 0.2);        
