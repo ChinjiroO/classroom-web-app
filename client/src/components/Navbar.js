@@ -1,6 +1,4 @@
 import React, { useState } from 'react'
-
-
 import { MdAssignment, MdPeople } from 'react-icons/md'
 import { CgFeed } from 'react-icons/cg'
 import { HiMenu } from 'react-icons/hi'
@@ -11,17 +9,17 @@ import { Offcanvas, Container } from 'react-bootstrap'
 export const Items = [
     {
         title: "Feed",
-        to: "/",
+        to: "/dashboard/",
         icon: <CgFeed size="2em"/>, 
     },
     {
         title: "Classwork",
-        to: "/classwork",
+        to: "/dashboard/classwork",
         icon: <MdAssignment size="2em"/>, 
     },
     {
         title: "Member",
-        to: "/member",
+        to: "/dashboard/member",
         icon: <MdPeople size="2em"/>, 
     },
 ];

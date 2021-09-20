@@ -1,3 +1,3 @@
-import { authRoutes } from './pages/auth'
+import { dashboardRoutes } from './pages/dashboard'
 
-export const routes = [...authRoutes]
+export const routes = [ ...dashboardRoutes]

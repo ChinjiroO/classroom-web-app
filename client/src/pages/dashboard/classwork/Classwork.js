@@ -1,7 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
+import Navbar from '../../../components/Navbar'
 import { Container } from 'react-bootstrap'
-import MaterialList from '../../components/Material'
+// import MaterialList from '../../../components/Material'
 
 // export const material = [
 //     {
@@ -48,18 +49,21 @@ import MaterialList from '../../components/Material'
 
 const Classwork = (props) => {
     return (
+        <div>
+        <Navbar/>
         <Scontainer fluid>
             {/* {material.map((items, index) => (
                 <Material 
-                    key={index}
-                    title={items.title}
+                key={index}
+                title={items.title}
                     desc={items.desc}
                     file={items.file}
-                />
-            ))}             */}
+                    />
+                ))}             */}
             Classwork
-            <MaterialList />
+            {/* <MaterialList /> */}
         </Scontainer>
+        </div>
     )
 }
 

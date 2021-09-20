@@ -1,9 +1,13 @@
 import React from 'react'
+import Navbar from '../../../components/Navbar'
 
 function Home() {
     return (
-        <div className="container-fluid">
-            HomePage        
+        <div>
+            <Navbar />
+            <div className="container-fluid">
+                HomePage        
+            </div>
         </div>
     )
 }
