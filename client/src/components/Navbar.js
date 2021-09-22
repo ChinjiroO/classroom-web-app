@@ -9,6 +9,7 @@ import { Offcanvas, Container } from "react-bootstrap";
 import * as actionType from "../constant/actionTypes";
 import CreateModal from "./CreateModal";
 import decode from 'jwt-decode'
+import axios from "axios";
 
 //* menu items
 export const Items = [
@@ -19,12 +20,11 @@ export const Items = [
   },  
 ];
 export const MenuItems = (props) => {
-  const { title, to, icon } = props;
+  const { title, to } = props;
   return (
     <Container>
       <Slink exact to={to} on>
         <Sitem>
-          <i>{icon}</i>
           <span>{title}</span>
         </Sitem>
       </Slink>
@@ -59,6 +59,23 @@ const Navbar = (props) => {
     }
     setUser(JSON.parse(localStorage.getItem('profile')));
   }, [location]);
+
+  //get data from collection "classrooms"
+	const [datas, setData] = useState([]);
+	const [isLoading, setIsLoading] = useState(false);
+	
+	useEffect(() => {
+		const fetchData = async () => {
+			setIsLoading(true);
+			const result = await axios
+				.get("http://localhost:9000/classroom")
+				.catch((error) => console.log(error));				
+			setData(result.data);
+			console.log(result.data);
+			setIsLoading(false);
+		}
+		fetchData();
+	}, []);
 
   return (
     <div>
@@ -112,18 +129,20 @@ const Navbar = (props) => {
             </Offcanvas.Header>
             <Offcanvas.Body style={{ paddingTop: "0" }}>
               <hr />
-              <h6>My classroom</h6>
-              <>
-                {Items.map((items, index) => (
-                  <MenuItems
-                    key={index}
-                    title={items.title}
-                    icon={items.icon}
-                    to={items.to}
-                    onHide={handleInactive}
-                  />
-                ))}
-              </>
+              <h6>My classroom</h6>              
+              {isLoading ? (
+                <div>Loading ...</div>
+              ) : (
+                <div>
+                  {datas.map((items, index) => (
+                    <MenuItems
+                      title={items.nameOfClass}
+                      to={items.to}
+                      onHide={handleInactive}
+                    />
+                  ))}              
+                </div>
+              )}
             </Offcanvas.Body>
           </Offcanvas>
         </Sdiv>
