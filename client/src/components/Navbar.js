@@ -1,32 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory, useLocation } from "react-router-dom";
-import { MdAssignment, MdPeople } from "react-icons/md";
 import { CgFeed } from "react-icons/cg";
 import { HiMenu } from "react-icons/hi";
 import { GrAdd } from "react-icons/gr";
-import { Snav, Sdiv, Sa, Sbutton, Slink, Sitem } from "./Styled";
+import { Snav, Sdiv, Sa, Sbutton, Slink, Sitem, Simage } from "./Styled";
 import { Offcanvas, Container } from "react-bootstrap";
 import * as actionType from "../constant/actionTypes";
 import CreateModal from "./CreateModal";
+import decode from 'jwt-decode'
 
 //* menu items
 export const Items = [
   {
     title: "Feed",
-    to: "/dashboard/",
+    to: "/",
     icon: <CgFeed size="2em" />,
-  },
-  {
-    title: "Classwork",
-    to: "/dashboard/classwork",
-    icon: <MdAssignment size="2em" />,
-  },
-  {
-    title: "Member",
-    to: "/dashboard/member",
-    icon: <MdPeople size="2em" />,
-  },
+  },  
 ];
 export const MenuItems = (props) => {
   const { title, to, icon } = props;
@@ -50,6 +40,7 @@ const Navbar = (props) => {
 
   const history = useHistory();
   const dispatch = useDispatch();
+  const location = useLocation();
 
   const handleActive = () => setActive(true);
   const handleInactive = () => setActive(false);
@@ -59,6 +50,15 @@ const Navbar = (props) => {
     history.push("/sign_in");
     setUser(null);
   };
+  useEffect(() => {
+    const token = user?.token;
+    if (token) {
+      const decodedToken = decode(token);
+      if (decodedToken.exp * 1000 < new Date().getTime()) 
+        logout();
+    }
+    setUser(JSON.parse(localStorage.getItem('profile')));
+  }, [location]);
 
   return (
     <div>
@@ -76,11 +76,14 @@ const Navbar = (props) => {
             GoRoom
           </Sa>
           {/*//! User Profile */}
-          {/* <div>
-
-          </div> */}
+          <div>    
+            <span>{user?.result.name}</span>            
+          </div>
           {/*//! Toggler */}
           <div>
+            <Sbutton className="logout" onClick={logout}>
+              Logout
+            </Sbutton>
 						<Sbutton onClick={() => setModal(true)}>
 							<GrAdd style={darkIcon}/>
 						</Sbutton>
@@ -88,11 +91,11 @@ const Navbar = (props) => {
 							show={modal}
 							onHide={() => setModal(false)}
 						/>
-            <Sbutton className="logout" onClick={logout}>
-              Logout
-            </Sbutton>
             <Sbutton onClick={handleActive}>
               <HiMenu style={darkIcon} />
+            </Sbutton>
+            <Sbutton>
+              <Simage fluid roundedCircle src={user?.result.imageUrl} alt={user?.result.name}/>            
             </Sbutton>
           </div>
 

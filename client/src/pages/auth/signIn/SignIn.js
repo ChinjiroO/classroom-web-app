@@ -1,23 +1,14 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import {
-  Container,
-  Col,
-  Row,
-  Form,
-  Button,
-  FormControl,
-  Image,
-  FormLabel,
-} from "react-bootstrap";
+import { Container, Col, Row, Form, Button, FormControl, Image, FormLabel } from "react-bootstrap";
 import { FcGoogle } from "react-icons/fc";
 import bg1 from "../../../assets/bg1.jpg";
 import { GoogleLogin } from "react-google-login";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { signin } from "../../../actions/auth";
 import { AUTH } from "../../../constant/actionTypes";
 import { Link } from "react-router-dom";
+import axios from 'axios'
 
 const LoginForm = (props) => {
   const dispatch = useDispatch();
@@ -33,11 +24,8 @@ const LoginForm = (props) => {
   const handleInputs = (e) => {
     name = e.target.name;
     value = e.target.value;
-
     setUser({ ...user, [name]: value });
-
     // e.preventDefault();
-    console.log(value);
   };
 
   //* Google Authentication
@@ -47,8 +35,14 @@ const LoginForm = (props) => {
 
     try {
       dispatch({ type: AUTH, data: { result, token } });
-      console.log(res);
-      history.push("/dashboard/");
+      console.log(result);
+
+      setUser({ ...user, email: result.email});
+      axios
+        .post("http://localhost:9000/user/add", user.email)
+        .then((res) => console.log(res.data));  
+
+      history.push("/");
     } catch (error) {
       console.log(error);
     }

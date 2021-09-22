@@ -2,13 +2,15 @@ import React from "react";
 import { Card, Button } from "react-bootstrap";
 import styled from "styled-components";
 
-const ClassroomCard = () => {
+const ClassroomCard = (props) => {
+	const { nameOfClass, _id, subject} = props
+	
   return (
     <Scard>
       <Card.Body>
-				<Card.Title>Class name</Card.Title>
-				<Card.Text>Subject</Card.Text>
-				<Sbutton>Go somewhere</Sbutton>
+				<Card.Title>{nameOfClass}</Card.Title>
+				<Card.Text>{subject}</Card.Text>
+				<Sbutton to={_id}>Enter</Sbutton>
 			</Card.Body>
     </Scard>
   );

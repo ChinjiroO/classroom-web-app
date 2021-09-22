@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Button } from 'react-bootstrap'
+import { Button, Image } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 
 const Nav = ({ className, children }) => (
@@ -23,6 +23,11 @@ export const Slink = styled(Link)`
 `
 export const Sitem = styled.div`
     margin: 0.75em 0 0 0;
+`
+export const Simage = styled(Image)`
+    width: 1.5rem;
+    height: 1.5rem;
+    /* margin-left: 0.5rem; */
 `
 export const Sbutton = styled(Button)`
     background-color: #F8FAFD;
