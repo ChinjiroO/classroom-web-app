@@ -1,9 +1,12 @@
 const express = require('express');
 const cors = require('cors');
+const path = require('path')
 
 const PORT = process.env.PORT || 9000;
 const app = express();
 const dbo = require("./databases/connect");
+
+app.use(express.static(path.resolve(__dirname, '../client/build')));
 
 app.use(express.json());
 app.use(cors());
@@ -19,3 +22,6 @@ app.listen(PORT, () => {
   console.log(`Server is running on port: ${PORT}`);
 });
 
+app.get('*', function(request, response) {
+  response.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
+});
