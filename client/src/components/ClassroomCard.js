@@ -1,6 +1,7 @@
 import React from "react";
 import { Card, Button } from "react-bootstrap";
 import styled from "styled-components";
+import { Link } from 'react-router-dom'
 
 const ClassroomCard = (props) => {
 	const { nameOfClass, _id, subject} = props
@@ -10,7 +11,9 @@ const ClassroomCard = (props) => {
       <Card.Body>
 				<Card.Title>{nameOfClass}</Card.Title>
 				<Card.Text>{subject}</Card.Text>
-				<Sbutton to={_id}>Enter</Sbutton>
+				<Link to={`/h/${_id}/feed`}>
+					<Sbutton>Enter</Sbutton>
+				</Link>
 			</Card.Body>
     </Scard>
   );

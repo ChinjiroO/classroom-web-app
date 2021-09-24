@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory, useLocation } from "react-router-dom";
-import { CgFeed } from "react-icons/cg";
 import { HiMenu } from "react-icons/hi";
 import { GrAdd } from "react-icons/gr";
 import { Snav, Sdiv, Sa, Sbutton, Slink, Sitem, Simage } from "./Styled";
@@ -11,19 +10,11 @@ import CreateModal from "./CreateModal";
 import decode from 'jwt-decode'
 import axios from "axios";
 
-//* menu items
-export const Items = [
-  {
-    title: "Feed",
-    to: "/",
-    icon: <CgFeed size="2em" />,
-  },  
-];
 export const MenuItems = (props) => {
-  const { title, to } = props;
+  const { title, _id } = props;
   return (
     <Container>
-      <Slink exact to={to} on>
+      <Slink to={_id} >
         <Sitem>
           <span>{title}</span>
         </Sitem>
@@ -46,32 +37,37 @@ const Navbar = (props) => {
   const handleInactive = () => setActive(false);
 
   const logout = () => {
-    dispatch({ type: actionType.LOGOUT });
+
+    dispatch({ 
+      type: actionType.LOGOUT
+    });
+
     history.push("/sign_in");
     setUser(null);
   };
+
   useEffect(() => {
+
     const token = user?.token;
     if (token) {
       const decodedToken = decode(token);
       if (decodedToken.exp * 1000 < new Date().getTime()) 
         logout();
     }
-    setUser(JSON.parse(localStorage.getItem('profile')));
   }, [location]);
 
-  //get data from collection "classrooms"
-	const [datas, setData] = useState([]);
+	const [classrooms, setClassrooms] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
-	
+
+  //get data from collection "classrooms"
 	useEffect(() => {
 		const fetchData = async () => {
 			setIsLoading(true);
-			const result = await axios
+			const res = await axios
 				.get("http://localhost:9000/classroom")
-				.catch((error) => console.log(error));				
-			setData(result.data);
-			console.log(result.data);
+				.catch((error) => console.log(error));		
+
+			setClassrooms(res.data);
 			setIsLoading(false);
 		}
 		fetchData();
@@ -134,10 +130,11 @@ const Navbar = (props) => {
                 <div>Loading ...</div>
               ) : (
                 <div>
-                  {datas.map((items, index) => (
+                  {classrooms.map((items, index) => (
                     <MenuItems
+                      key={index}
                       title={items.nameOfClass}
-                      to={items.to}
+                      _id={items._id}
                       onHide={handleInactive}
                     />
                   ))}              

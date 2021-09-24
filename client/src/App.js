@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import SignIn from './pages/auth/signIn/SignIn'
-import Home from './pages/dashboard/home/Home'
+// import Home from './pages/dashboard/home/Home'
 import { useLocation } from 'react-router-dom'
 import decode from 'jwt-decode'
-// import { Route } from 'react-router-dom'
-// import { routes } from './routes'
+import { Route } from 'react-router-dom'
+import { routes } from './pages/routes'
 
 function App() {
-  // const routeComponents = routes.map(
-  //   ({path, component}, key) => <Route exact path={path} component={component} key={key} />);
 
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));  
   const location = useLocation();
@@ -23,11 +21,16 @@ function App() {
     setUser(JSON.parse(localStorage.getItem('profile')));
     
   }, [location]);
+
+  const routeComponents = routes.map(
+    ({path, component}, key) => <Route exact path={path} component={component} key={key} />);
   
   return (
     <div>
       {user?.result ? (
-        <Home />
+        <div>
+            {routeComponents}
+        </div>
       ) : (
         <SignIn/>
       )}      

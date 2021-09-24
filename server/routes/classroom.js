@@ -24,7 +24,17 @@ classroomRoutes.route("/classroom").get(function (req, res) {
       .toArray(function (err, result) {
         if (err) throw err;
         res.json(result);
-        console.log(result);
+			});
+});
+
+classroomRoutes.route("/classroom/:room").get(function (req, res) {
+  let db_connect = dbo.getDb("go_room");
+  let myquery = { room: req.body.room };
+  db_connect
+      .collection("classrooms")
+      .findOne(myquery, function (err, result) {
+        if (err) throw err;
+        res.json(result);
 			});
 });
 
