@@ -88,10 +88,6 @@ const Navbar = (props) => {
             />
             GoRoom
           </Sa>
-          {/*//! User Profile */}
-          <div>    
-            <span>{user?.result.name}</span>            
-          </div>
           {/*//! Toggler */}
           <div>
             <Sbutton className="logout" onClick={logout}>

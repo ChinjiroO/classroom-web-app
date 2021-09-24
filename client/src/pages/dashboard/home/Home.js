@@ -13,10 +13,11 @@ function Home(props) {
 		const fetchData = async () => {
 			setIsLoading(true);
 			const res = await axios
-				.get("http://localhost:9000/classroom")
+				.get("http://localhost:9000/classroom/" + user.result.googleId)
 				.catch((error) => console.log(error));				
 
 			setClassrooms(res.data);			
+			console.log(res.data);
 			setIsLoading(false);
 		}
 		fetchData();
@@ -42,7 +43,7 @@ function Home(props) {
 		}		
 		getOneUser();		
 	}, []);
-		
+	
   return (
     <div>
       <Navbar />
