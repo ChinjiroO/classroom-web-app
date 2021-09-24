@@ -8,21 +8,20 @@ function Home(props) {
 	const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
 	const [classrooms, setClassrooms] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);		
-	//get data from collection "classrooms"
+	//*get data from collection "classrooms"
 	useEffect(() => {
 		const fetchData = async () => {
 			setIsLoading(true);
 			const res = await axios
 				.get("http://localhost:9000/classroom/" + user.result.googleId)
 				.catch((error) => console.log(error));				
-
 			setClassrooms(res.data);			
-			console.log(res.data);
+			// console.log(res.data);
 			setIsLoading(false);
 		}
 		fetchData();
 	}, []);
-	//Check user if haven't in mongodb let will add them to mongodb
+	//*Check user if haven't in mongodb let will add them to mongodb
 	useEffect(() => {
 		const postUser = async () => {
 			const res = await axios
@@ -34,7 +33,7 @@ function Home(props) {
 				const resU = await axios			
 				.get('http://localhost:9000/user/'+ user.result.googleId)			
 				.catch((err) => console.log(err));
-				console.log(resU);
+				// console.log(resU);
 				if(resU.data == null) {
 					console.log("Fist time to come in this here.");
 					postUser();

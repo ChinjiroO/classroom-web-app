@@ -16,9 +16,8 @@ function Feed() {
 			const res = await axios
 				.get("http://localhost:9000/classroom/id/" + id)
 				.catch((error) => console.log(error));				
-
 			setClassroom(res.data);			
-			console.log(res.data);
+			// console.log(res.data);
 			setIsLoading(false);
 		}
 		fetchData();
@@ -40,13 +39,17 @@ function Feed() {
           </Hcard>
         </div> 
         {/* //!Body */}
-        <Container>
+        <Container fluid>
           <Row>
-            <Col>
-              1
+            <Col md={3}>
+              <Card style={{backgroundColor: '#f6f6f6', height: '100vh', border: 'none'}}>
+                
+              </Card>
             </Col>
-            <Col>
-              2
+            <Col md={9}>
+              <Card style={{backgroundColor: '#f6f6f6', height: '100vh', border: 'none'}}>
+
+              </Card>
             </Col>
           </Row>
         </Container>

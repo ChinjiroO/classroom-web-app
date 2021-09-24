@@ -71,9 +71,6 @@ function CreateModal(props) {
         <Button type="submit" value="Submit">Submit</Button>
         </Form>
       </Modal.Body>
-      <Modal.Footer>
-        <Button onClick={props.onHide}>Close</Button>
-      </Modal.Footer>
     </Modal>
   )
 }

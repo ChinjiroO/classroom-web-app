@@ -14,7 +14,7 @@ export const MenuItems = (props) => {
   const { title, _id } = props;
   return (
     <Container>
-      <Slink to={_id} >
+      <Slink to={`/h/${_id}/feed`} >
         <Sitem>
           <span>{title}</span>
         </Sitem>
@@ -24,10 +24,12 @@ export const MenuItems = (props) => {
 };
 const darkIcon = { fontSize: "1.5rem", backgroundColor: "transparent" };
 
-const Navbar = (props) => {
+const Navbar = () => {
   const [active, setActive] = useState(false);
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
 	const [modal, setModal] = useState(false);
+  const [classrooms, setClassrooms] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const history = useHistory();
   const dispatch = useDispatch();
@@ -37,17 +39,14 @@ const Navbar = (props) => {
   const handleInactive = () => setActive(false);
 
   const logout = () => {
-
     dispatch({ 
       type: actionType.LOGOUT
     });
-
     history.push("/sign_in");
     setUser(null);
   };
 
   useEffect(() => {
-
     const token = user?.token;
     if (token) {
       const decodedToken = decode(token);
@@ -56,15 +55,12 @@ const Navbar = (props) => {
     }
   }, [location]);
 
-	const [classrooms, setClassrooms] = useState([]);
-	const [isLoading, setIsLoading] = useState(false);
-
-  //get data from collection "classrooms"
+  //*get data from collection "classrooms"
 	useEffect(() => {
 		const fetchData = async () => {
 			setIsLoading(true);
 			const res = await axios
-				.get("http://localhost:9000/classroom")
+				.get("http://localhost:9000/classroom/"+ user.result.googleId)
 				.catch((error) => console.log(error));		
 
 			setClassrooms(res.data);
