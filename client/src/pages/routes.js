@@ -7,13 +7,13 @@ export const routes = [
         component: Home,
         isAuth: true,
         exact: true,
-    },
+    },    
     {
         path: '/',
         component: Home,
         isAuth: true,
         exact: true,
-    },
+    },    
     {
         path: '/h/:id/feed',
         component: Feed,

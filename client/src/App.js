@@ -1,10 +1,8 @@
-import React, { useState, useEffect } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import SignIn from './pages/auth/signIn/SignIn'
-// import Home from './pages/dashboard/home/Home'
-import { useLocation } from 'react-router-dom'
 import decode from 'jwt-decode'
-import { Route } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { Route, useLocation, Switch } from 'react-router-dom'
+import SignIn from './pages/auth/signIn/SignIn'
 import { routes } from './pages/routes'
 
 function App() {
@@ -29,7 +27,10 @@ function App() {
     <div>
       {user?.result ? (
         <div>
+          <Switch>
             {routeComponents}
+            <Route component={PageNotFound} />
+          </Switch>
         </div>
       ) : (
         <SignIn/>
@@ -39,3 +40,13 @@ function App() {
 }
 
 export default App;
+
+function PageNotFound() {
+  let location = useLocation();
+  return (
+    <div>
+      404 Page Not Found<br/>
+      <code>{location.pathname}</code>
+    </div>
+  )
+}
