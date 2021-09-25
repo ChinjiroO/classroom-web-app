@@ -16,8 +16,7 @@ function App() {
       const decodedToken = decode(token);
       if (decodedToken.exp * 1000 < new Date().getTime());
     }
-    setUser(JSON.parse(localStorage.getItem('profile')));
-    
+    setUser(JSON.parse(localStorage.getItem('profile')));    
   }, [location]);
 
   const routeComponents = routes.map(

@@ -4,11 +4,13 @@ import { useHistory, useLocation } from "react-router-dom";
 import { HiMenu } from "react-icons/hi";
 import { GrAdd } from "react-icons/gr";
 import { Snav, Sdiv, Sa, Sbutton, Slink, Sitem, Simage } from "./Styled";
-import { Offcanvas, Container } from "react-bootstrap";
+import { Container, DropdownButton, Nav, NavDropdown } from "react-bootstrap";
 import * as actionType from "../constant/actionTypes";
 import CreateModal from "./CreateModal";
 import decode from 'jwt-decode'
 import axios from "axios";
+import { OffCanvas } from "./OffCanvas";
+import styled from "styled-components";
 
 export const MenuItems = (props) => {
   const { title, _id } = props;
@@ -84,11 +86,19 @@ const Navbar = () => {
             />
             GoRoom
           </Sa>
-          {/*//! Toggler */}
-          <div>
+          {/*//! Nav Items */}
+          <Nav>
             <Sbutton className="logout" onClick={logout}>
               Logout
             </Sbutton>
+            {/* //!dropdown */}
+            {/* <NavDropdown id="basic-nav-dropdown" >
+              <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
+              <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
+              <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
+              <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
+            </NavDropdown> */}
+
 						<Sbutton onClick={() => setModal(true)}>
 							<GrAdd style={darkIcon}/>
 						</Sbutton>
@@ -102,38 +112,10 @@ const Navbar = () => {
             <Sbutton>
               <Simage fluid roundedCircle src={user?.result.imageUrl} alt={user?.result.name}/>            
             </Sbutton>
-          </div>
+          </Nav>
 
           {/*//! OffCanvas */}
-          <Offcanvas show={active} onHide={handleInactive}>
-            <Offcanvas.Header closeButton style={{ paddingBottom: "0" }}>
-              <img
-                src="https://getbootstrap.com/docs/5.1/assets/brand/bootstrap-logo.svg"
-                alt=""
-                width="30"
-                height="24"
-              />
-              <Offcanvas.Title>GoRoom</Offcanvas.Title>
-            </Offcanvas.Header>
-            <Offcanvas.Body style={{ paddingTop: "0" }}>
-              <hr />
-              <h6>My classroom</h6>              
-              {isLoading ? (
-                <div>Loading ...</div>
-              ) : (
-                <div>
-                  {classrooms.map((items, index) => (
-                    <MenuItems
-                      key={index}
-                      title={items.nameOfClass}
-                      _id={items._id}
-                      onHide={handleInactive}
-                    />
-                  ))}              
-                </div>
-              )}
-            </Offcanvas.Body>
-          </Offcanvas>
+          {OffCanvas(active, handleInactive, isLoading, classrooms)}
         </Sdiv>
       </Snav>
     </div>
@@ -141,3 +123,10 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
+export const SdropdownBtn = styled(DropdownButton)`
+  &.dropdown-toggle::after {
+    display: none !important;
+    content: none !important;
+  }
+`

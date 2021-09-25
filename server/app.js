@@ -13,6 +13,7 @@ app.use(cors());
 
 app.use(require('./routes/classroom'));
 app.use(require('./routes/user'));
+app.use(require('./routes/items'));
 
 app.listen(PORT, () => {
   // perform a database connection when server starts

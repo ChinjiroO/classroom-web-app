@@ -1,14 +1,20 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 import { Form, Modal, Button, FloatingLabel } from 'react-bootstrap'
+import { useHistory } from 'react-router-dom'
+import { ObjectID } from 'bson';
 
 function CreateModal(props) {
+  const user = JSON.parse(localStorage.getItem("profile"));
   const [classRoom, setClassRoom] = useState({
+    _id: ObjectID(),
     nameOfClass: "",
     room: "",
-    subject: ""
+    subject: "",
+    members: [user.result.googleId]
   });
-  let nameOfClass, room, subject, value;
+  let nameOfClass, room, subject, value, members;
+  let history = useHistory();
 
   const onChangeClassName = (e) => {
     nameOfClass = e.target.nameOfClass;
@@ -30,7 +36,10 @@ function CreateModal(props) {
     axios
       .post("http://localhost:9000/classroom/add", classRoom)
       .then((res) => console.log(res.data));    
-    console.log(classRoom);
+    console.log("Create a new classroom successful"); 
+    const _id = classRoom._id;
+    console.log(_id); 
+    history.push(`/h/${_id}/feed`);
   };
   
   return (

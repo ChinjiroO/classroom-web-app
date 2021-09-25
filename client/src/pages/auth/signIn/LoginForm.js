@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import { GoogleLogin } from "react-google-login";
 import { useDispatch } from "react-redux";
@@ -9,18 +9,15 @@ import { GoogleIcon, Sbutton, ScontainerLabel, Sform, SformControl, SformLabel, 
 export const LoginForm = (props) => {
   const dispatch = useDispatch();
   const history = useHistory();
-
-  const [user, setUser] = useState({
-    name: "",
-    email: "",
-    password: "",
-  });
-
+  // const [user, setUser] = useState({
+  //   name: "",
+  //   email: "",
+  //   password: "",
+  // });
   //* Google Authentication
   const googleSuccess = async (res) => {
     const result = res?.profileObj;
     const token = res?.tokenId;
-
     try {
       dispatch({
         type: AUTH,
@@ -47,7 +44,8 @@ export const LoginForm = (props) => {
               className="form-control"
               type="email"
               placeholder="Enter email"
-              defaultValue={user.name} />
+              // defaultValue={user.name}
+              />
           </Form.Group>
           <Form.Group className="mb-3" controlId="formBasicPassword">
             <Form.Label>Password</Form.Label>
@@ -81,7 +79,7 @@ export const LoginForm = (props) => {
             onSuccess={googleSuccess}
             onFalse={googleFailure}
             cookiePolicy="single_host_origin"
-          ></GoogleLogin>
+          />
         </Col>
       </Row>
     </Sform>
