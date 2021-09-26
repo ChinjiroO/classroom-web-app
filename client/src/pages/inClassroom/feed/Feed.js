@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { ReactTinyLink } from "react-tiny-link";
+import { ReactTinyLink, useScrapper } from "react-tiny-link";
 import axios from "axios";
 import Navbar from "../../../components/Navbar";
 import { useParams } from "react-router-dom";
@@ -12,14 +12,25 @@ import {
   SnavItem,
   SnavLink,
   BcardContent,
+  Srow,
+  Bnav,
+  Icol,
+  ItemsContainer,
+  Icard,
+  IcardTitle,
+  IcardDescription,
 } from "./Styled";
-import styled from "styled-components";
 import { FaBook } from "react-icons/fa";
+import { ObjectId } from 'bson';
 
 function Feed() {
   let { id } = useParams();
+  let urls =
+    "https://drive.google.com/file/d/1ClwyLgfodjvu0vOlVYPbq3SOtirDl0Gn/view?usp=sharing";
+
   const [classroom, setClassroom] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [topics, setTopics] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -28,10 +39,21 @@ function Feed() {
         .get("http://localhost:9000/classroom/id/" + id)
         .catch((error) => console.log(error));
       setClassroom(res.data);
-      // console.log(res.data);
       setIsLoading(false);
     };
     fetchData();
+  }, []);
+
+  //* -----------Fetch Topics by current classroom_id -----------
+  useEffect(() => {
+    const getTopic = async () => {
+      const res = await axios
+        .get("http://localhost:9000/topics/" + id)
+        .catch((err) => console.log(err));
+      setTopics(res.data);
+      return res;
+    };
+    getTopic();
   }, []);
 
   return (
@@ -41,56 +63,52 @@ function Feed() {
         {/* //!Header */}
         {HCardFeed(isLoading, classroom)}
         {/* //!Body */}
-        <Tab.Container fluid defaultActiveKey="first">
+        <Tab.Container fluid >
           <Srow>
-            {/* //! Topic of lesson Tabs */}
             <Col md={3}>
               <Bcard>
                 <Card.Title>Lesson Tabs</Card.Title>
                 <Bnav variant="pills" className="flex-column">
-                  <Nav.Item>
-                    <Nav.Link eventKey="first">Tab 1</Nav.Link>
-                  </Nav.Item>
-                  <Nav.Item>
-                    <Nav.Link eventKey="second">Tab 2</Nav.Link>
-                  </Nav.Item>
+                  {topics.map((topic) => (
+                    <Nav.Item>
+                      <Nav.Link eventKey={topic._id}>
+                        {topic.title}
+                      </Nav.Link>
+                    </Nav.Item>
+                  ))}
                 </Bnav>
               </Bcard>
             </Col>
-            {/* //! Show item in Topic, When Tabs selected */}
-            <Col md={9}>
+
+            <Icol md={9}>
               <BcardContent>
                 <Tab.Content>
-                  <Tab.Pane eventKey="first">
-                    {/* //! item card */}
-                    <ItemsContainer fluid>
-                      <Icard>
-                        <IcardTitle>
-                          <FaBook color="#000" size="2rem" />
-                          Title
-                        </IcardTitle>
-                        <hr />
-                        <IcardDescription>
-                          Magna ad qui cupidatat proident ea nostrud irure.
-                        </IcardDescription>
-                      </Icard>
-                    </ItemsContainer>
-                  </Tab.Pane>
-                  <Tab.Pane eventKey="second">
-                    <span>
-                      Adipisicing sunt minim non labore nisi adipisicing elit
-                    </span>
-                    <ReactTinyLink 
-                      cardSize="small"
-                      showGraphic={true}
-                      maxLine={2}
-                      minLine={1}
-                      url="https://www.youtube.com/watch?v=yeLzT0M21Kk"
-                    />                    
-                  </Tab.Pane>
+                  {topics.map((topic) => (
+                    <Tab.Pane eventKey={topic._id}>
+                      <ItemsContainer fluid>
+                        {topic.items.map((item) => (
+                          <Icard>
+                            <IcardTitle>
+                              <FaBook color="#000" size="2rem" />
+                              {item.title}
+                            </IcardTitle>
+                            <hr />
+                            <IcardDescription></IcardDescription>
+                              <ReactTinyLink 
+                                cardSize="small"
+                                showGraphic={true}
+                                maxLine={2}
+                                minLine={1}
+                                url={item.attachments}
+                              ></ReactTinyLink>
+                          </Icard>
+                        ))}
+                      </ItemsContainer>
+                    </Tab.Pane>
+                  ))}
                 </Tab.Content>
               </BcardContent>
-            </Col>
+            </Icol>
           </Srow>
         </Tab.Container>
       </Scontainer>
@@ -99,31 +117,3 @@ function Feed() {
 }
 
 export default Feed;
-
-export const Btab = styled(Tab)``;
-export const Bnav = styled(Nav)``;
-export const Icard = styled(Card)`
-  background-color: rgb(13, 40, 98, 0.15);
-  width: 100%;
-  border-radius: 0.5rem;
-  border: none;
-  padding: 1rem;
-`;
-export const IcardTitle = styled(Card.Title)`
-  color: #0d2862;
-  font-size: medium;
-`;
-export const IcardDescription = styled(Card.Text)`
-  font-size: small;
-  color: #5b6d94;
-`;
-export const ItemsContainer = styled(Container)`
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  gap: 1.5rem;
-  padding: 0;
-`;
-export const Srow = styled(Row)`
-  row-gap: 1rem;
-`;

@@ -87,7 +87,7 @@ const Navbar = () => {
             GoRoom
           </Sa>
           {/*//! Nav Items */}
-          <Nav>
+          <SiNav>
             <Sbutton className="logout" onClick={logout}>
               Logout
             </Sbutton>
@@ -112,7 +112,7 @@ const Navbar = () => {
             <Sbutton>
               <Simage fluid roundedCircle src={user?.result.imageUrl} alt={user?.result.name}/>            
             </Sbutton>
-          </Nav>
+          </SiNav>
 
           {/*//! OffCanvas */}
           {OffCanvas(active, handleInactive, isLoading, classrooms)}
@@ -129,4 +129,7 @@ export const SdropdownBtn = styled(DropdownButton)`
     display: none !important;
     content: none !important;
   }
+`
+export const SiNav = styled(Nav)`
+  gap: 0.75rem;
 `

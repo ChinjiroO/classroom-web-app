@@ -16,8 +16,9 @@ function Home(props) {
 				.get("http://localhost:9000/classroom/" + user.result.googleId)
 				.catch((error) => console.log(error));				
 			setClassrooms(res.data);			
-			// console.log(res.data);
+			console.log(res.data);
 			setIsLoading(false);
+			console.log(classrooms);
 		}
 		fetchData();
 	}, []);
