@@ -4,7 +4,7 @@ import ClassroomCard from "../../../components/ClassroomCard";
 import Navbar from "../../../components/Navbar";
 import { Scontainer } from "./Styled";
 
-function Home(props) {	
+function Home() {	
 	const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
 	const [classrooms, setClassrooms] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);		
@@ -16,9 +16,7 @@ function Home(props) {
 				.get("http://localhost:9000/classroom/" + user.result.googleId)
 				.catch((error) => console.log(error));				
 			setClassrooms(res.data);			
-			console.log(res.data);
 			setIsLoading(false);
-			console.log(classrooms);
 		}
 		fetchData();
 	}, []);

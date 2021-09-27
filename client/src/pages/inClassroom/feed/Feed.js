@@ -1,16 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { ReactTinyLink, useScrapper } from "react-tiny-link";
+import { ReactTinyLink } from "react-tiny-link";
 import axios from "axios";
 import Navbar from "../../../components/Navbar";
 import { useParams } from "react-router-dom";
-import { Container, Row, Col, Tab, Nav, Card } from "react-bootstrap";
+import { Col, Tab, Nav, Card } from "react-bootstrap";
 import { HCardFeed } from "../../../components/HCardFeed";
 import {
   Sdiv,
   Scontainer,
   Bcard,
-  SnavItem,
-  SnavLink,
   BcardContent,
   Srow,
   Bnav,
@@ -21,12 +19,9 @@ import {
   IcardDescription,
 } from "./Styled";
 import { FaBook } from "react-icons/fa";
-import { ObjectId } from 'bson';
 
 function Feed() {
   let { id } = useParams();
-  let urls =
-    "https://drive.google.com/file/d/1ClwyLgfodjvu0vOlVYPbq3SOtirDl0Gn/view?usp=sharing";
 
   const [classroom, setClassroom] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -63,7 +58,7 @@ function Feed() {
         {/* //!Header */}
         {HCardFeed(isLoading, classroom)}
         {/* //!Body */}
-        <Tab.Container fluid >
+        <Tab.Container fluid>
           <Srow>
             <Col md={3}>
               <Bcard>
@@ -71,9 +66,7 @@ function Feed() {
                 <Bnav variant="pills" className="flex-column">
                   {topics.map((topic) => (
                     <Nav.Item>
-                      <Nav.Link eventKey={topic._id}>
-                        {topic.title}
-                      </Nav.Link>
+                      <Nav.Link eventKey={topic._id}>{topic.title}</Nav.Link>
                     </Nav.Item>
                   ))}
                 </Bnav>
@@ -94,13 +87,13 @@ function Feed() {
                             </IcardTitle>
                             <hr />
                             <IcardDescription></IcardDescription>
-                              <ReactTinyLink 
-                                cardSize="small"
-                                showGraphic={true}
-                                maxLine={2}
-                                minLine={1}
-                                url={item.attachments}
-                              ></ReactTinyLink>
+                            <ReactTinyLink
+                              cardSize="small"
+                              showGraphic={true}
+                              maxLine={2}
+                              minLine={1}
+                              url={item.attachments}
+                            ></ReactTinyLink>
                           </Icard>
                         ))}
                       </ItemsContainer>

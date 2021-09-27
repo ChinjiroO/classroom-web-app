@@ -11,6 +11,7 @@ import decode from 'jwt-decode'
 import axios from "axios";
 import { OffCanvas } from "./OffCanvas";
 import styled from "styled-components";
+import logo from "../assets/logo-icon.png"
 
 export const MenuItems = (props) => {
   const { title, _id } = props;
@@ -78,10 +79,10 @@ const Navbar = () => {
           {/*//! Brand name */}
           <Sa className="navbar-brand" href="/">
             <img
-              src="https://getbootstrap.com/docs/5.1/assets/brand/bootstrap-logo.svg"
+              src={logo}
               alt=""
               width="30"
-              height="24"
+              height="30"
               style={{ marginRight: "10px" }}
             />
             GoRoom

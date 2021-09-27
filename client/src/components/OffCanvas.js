@@ -1,15 +1,16 @@
 import React from "react";
 import { Offcanvas } from "react-bootstrap";
 import { MenuItems } from "./Navbar";
+import logo from '../assets/logo-icon.png';
 
 export function OffCanvas(active, handleInactive, isLoading, classrooms) {
   return <Offcanvas show={active} onHide={handleInactive}>
     <Offcanvas.Header closeButton style={{ paddingBottom: "0" }}>
       <img
-        src="https://getbootstrap.com/docs/5.1/assets/brand/bootstrap-logo.svg"
+        src={logo}
         alt=""
         width="30"
-        height="24" />
+        height="30" />
       <Offcanvas.Title>GoRoom</Offcanvas.Title>
     </Offcanvas.Header>
     <Offcanvas.Body style={{ paddingTop: "0" }}>
