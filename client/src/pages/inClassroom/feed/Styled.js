@@ -26,7 +26,14 @@ export const Hcard = styled(Card)`
     rgba(0, 0, 0, 0.1) 0px 2px 4px 0px,
     rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
 `
+export const HcardSub = styled(Card.Subtitle)`
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 0.5rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+  `
 export const HcardTitle = styled(Card.Title)`
+  font-weight: 700;
   color: #ffffff;
   font-size: 2.5rem;
   font-family: 'Noto Sans Thai', sans-serif;

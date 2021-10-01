@@ -2,9 +2,18 @@ import React from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import { GoogleLogin } from "react-google-login";
 import { useDispatch } from "react-redux";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { AUTH } from "../../../constant/actionTypes";
-import { GoogleIcon, Sbutton, ScontainerLabel, Sform, SformControl, SformLabel, StextHeader } from "./Styled";
+import {
+  GoogleIcon,
+  Sbutton,
+  ScontainerLabel,
+  Sform,
+  SformControl,
+  SformLabel,
+  StextHeader,
+  Slink,
+} from "./Styled";
 
 export const LoginForm = (props) => {
   const dispatch = useDispatch();
@@ -21,7 +30,7 @@ export const LoginForm = (props) => {
     try {
       dispatch({
         type: AUTH,
-        data: { result, token }
+        data: { result, token },
       });
       history.push("/h");
     } catch (error) {
@@ -45,7 +54,7 @@ export const LoginForm = (props) => {
               type="email"
               placeholder="Enter email"
               // defaultValue={user.name}
-              />
+            />
           </Form.Group>
           <Form.Group className="mb-3" controlId="formBasicPassword">
             <Form.Label>Password</Form.Label>
@@ -59,7 +68,7 @@ export const LoginForm = (props) => {
           <Form.Group className="mb-3">
             <ScontainerLabel>
               <SformLabel>Haven't an account?</SformLabel>
-              <Link to="/">Sign Up</Link>
+              <Slink to="/">Sign Up</Slink>
             </ScontainerLabel>
           </Form.Group>
         </Col>

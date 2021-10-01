@@ -8,4 +8,5 @@ export const Scontainer = styled(Container)`
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
+  z-index: -1;
 `;

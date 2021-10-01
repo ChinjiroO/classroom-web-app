@@ -1,6 +1,14 @@
 import styled from "styled-components";
-import { Container, Form, Button, FormControl, Image, FormLabel } from "react-bootstrap";
+import {
+  Container,
+  Form,
+  Button,
+  FormControl,
+  Image,
+  FormLabel,
+} from "react-bootstrap";
 import { FcGoogle } from "react-icons/fc";
+import { Link } from "react-router-dom";
 
 //position: absolute;
 //*horizontal align
@@ -57,4 +65,12 @@ export const ScontainerLabel = styled.div`
   display: flex;
   justify-content: flex-end;
   margin: 1rem 0 0 0;
+`;
+export const Slink = styled(Link)`
+  text-decoration: none;
+  color: #0d2862;
+  &:hover {
+    color: #0d2862;
+    opacity: 0.8;
+  }
 `;
