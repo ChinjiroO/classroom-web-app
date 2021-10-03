@@ -1,8 +1,9 @@
 import React from "react";
-import { Card, Button } from "react-bootstrap";
+import { Card, Button, Row, Col } from "react-bootstrap";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import bg from '../assets/bg1.jpg';
+import bg from "../assets/bg1.jpg";
+import CardHeader from "react-bootstrap/esm/CardHeader";
 
 const ClassroomCard = (props) => {
   const { nameOfClass, _id, subject } = props;
@@ -10,12 +11,21 @@ const ClassroomCard = (props) => {
   return (
     <Slink to={`/h/${_id}/feed`}>
       <Scard>
-        <Card.Body>
-          <ScardTitle>{nameOfClass}</ScardTitle>
+        <ScardHeader>
+          <Row>
+            <Col>
+              <ScardTitle>{nameOfClass}</ScardTitle>
+            </Col>
+            <Col>
+              <Button>aaaa</Button>
+            </Col>
+          </Row>
+        </ScardHeader>
+        <ScardBody>
           <Card.Text>{subject}</Card.Text>
-          <br/>
-          <br/>
-        </Card.Body>
+          <br />
+          <br />
+        </ScardBody>
       </Scard>
     </Slink>
   );
@@ -33,12 +43,11 @@ export const Scard = styled(Card)`
   will-change: transform;
   transition: transform 450ms;
   &:hover {
-    background-color: rgba(220, 234, 253);
     transition: transform 125ms;
     transform: translateY(-10px);
-		border: none;
+    border: none;
   }
-  `;
+`;
 export const Sbutton = styled(Button)``;
 export const Slink = styled(Link)`
   text-decoration: none;
@@ -52,4 +61,12 @@ export const ScardTitle = styled(Card.Title)`
   white-space: nowrap;
   text-overflow: ellipsis;
   width: 80%;
-`
+`;
+export const ScardHeader = styled(CardHeader)`
+  background-color: white;
+  border: none;
+  padding-bottom: 0;
+`;
+export const ScardBody = styled(Card.Body)`
+  padding-top: 0;
+`;

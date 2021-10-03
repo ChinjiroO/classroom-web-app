@@ -16,7 +16,7 @@ topicRoutes.route("/topics/:classroom_id").get(function (req, res) {
     });
 });
 //* -----------Create a new topic-----------
-topicRoutes.route("/topics/add").post(function (req, res) {
+topicRoutes.route("https://goroom.herokuapp.com/topics/add").post(function (req, res) {
   let db_connect = dbo.getDb("go_room");
   let topic = {
     title: req.body.title,
