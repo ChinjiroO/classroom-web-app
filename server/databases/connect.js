@@ -1,4 +1,5 @@
 const { MongoClient } = require("mongodb");
+// const mongoose = require("mongoose");
 const Db = "mongodb+srv://chinjiro:Chinchin1452@cluster0.aj7dr.mongodb.net/go_room?retryWrites=true&w=majority";
 const client = new MongoClient(Db, {
     useNewUrlParser: true,
