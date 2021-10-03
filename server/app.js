@@ -5,10 +5,16 @@ const uri = process.env.MONGODB_URI;
 const PORT = process.env.PORT || 9000;
 const app = express();
 const dbo = require("./databases/connect");
-app.use(cors());
+
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.resolve(__dirname, '../client/build')));
+}
+
 app.use(require("./routes/classroom"));
 app.use(require("./routes/user"));
 app.use(require("./routes/topics"));
+
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
