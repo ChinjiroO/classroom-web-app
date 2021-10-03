@@ -22,7 +22,7 @@ function CreateTopic(props) {
   });
   let title, value;
   const reloads = () => {
-    setTimeout(() => window.location.reload(), 500);
+    setTimeout(() => window.location.reload(), 5000);
   }
 
   const onChangeTitle = (e) => {
@@ -36,7 +36,7 @@ function CreateTopic(props) {
     const newTopic = topic;
     console.log(newTopic);
     axios
-      .post("https://goroom.herokuapp.com/topics/add", newTopic)
+      .post("http://localhost:5000/topics/add", newTopic)
       .then((res) => console.log(res.data))
       .catch((err) => console.log(err));
     console.log("Create a new topic successful");
