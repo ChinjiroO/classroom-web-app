@@ -62,7 +62,7 @@ function Feed() {
     const getClassroomData = async () => {
       setIsLoading(true);
       const res = await axios
-        .get("http://goroom.herokuapp.com/classroom/id/" + id)
+        .get("https://goroom.herokuapp.com/classroom/id/" + id)
         .catch((error) => console.log(error));
       console.log(id);
       setClassroom(res.data);
@@ -75,7 +75,7 @@ function Feed() {
   useEffect(() => {
     const getTopic = async () => {
       const res = await axios
-        .get("http://goroom.herokuapp.com/topics/" + id)
+        .get("https://goroom.herokuapp.com/topics/" + id)
         .catch((err) => console.log(err));
       // setID(res.data[0]._id.toString());
       setTopics(res.data);

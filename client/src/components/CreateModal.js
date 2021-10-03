@@ -35,7 +35,7 @@ function CreateModal(props) {
   const onCreate = (e) => {  
     e.preventDefault();    
     axios
-      .post("http://goroom.herokuapp.com/classroom/add", classRoom)
+      .post("https://goroom.herokuapp.com/classroom/add", classRoom)
       .then((res) => console.log(res.data));    
     console.log("Create a new classroom successful"); 
     const _id = classRoom._id;

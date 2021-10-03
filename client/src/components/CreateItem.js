@@ -21,7 +21,7 @@ const CreateItem = (props) => {
   useEffect(() => {
     const getTopic = async () => {
       const res = await axios
-        .get("http://goroom.herokuapp.com/topics/" + id)
+        .get("https://goroom.herokuapp.com/topics/" + id)
         .catch((err) => console.log(err));
       // setID(res.data[0]._id.toString());
       setTopics(res.data);
