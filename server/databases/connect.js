@@ -1,11 +1,11 @@
 const { MongoClient } = require("mongodb");
-const MONGODB_URI =
-  "mongodb://chinjiro:Chinchin1452@cluster0.aj7dr.mongodb.net/go_room?retryWrites=true&w=majority";
-const client = new MongoClient(uri, {
+const dotenv = require("dotenv").config();
+const MONGODB_URI = `mongodb+srv://${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}@cluster0.aj7dr.mongodb.net/go_room?retryWrites=true&w=majority`;
+
+const client = new MongoClient(MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
-const uri = process.env.MONGODB_URI;
 var _db;
 
 module.exports = {
