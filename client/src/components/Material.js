@@ -21,7 +21,7 @@ export default class MaterialList extends Component {
     // This method will get the data from the database.
     componentDidMount() {
         axios
-        .get("http://localhost:5000/materials")
+        .get("http://goroom.herokuapp.com/materials")
         .then((res) => {
             this.setState({ materials: res.data });
         })

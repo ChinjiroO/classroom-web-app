@@ -75,7 +75,7 @@ const Navbar = () => {
     const fetchData = async () => {
       setIsLoading(true);
       const res = await axios
-        .get("http://localhost:5000/classroom/" + user.result.googleId)
+        .get("http://goroom.herokuapp.com/classroom/" + user.result.googleId)
         .catch((error) => console.log(error));
 
       setClassrooms(res.data);

@@ -17,7 +17,7 @@ const JoinClass = () => {
   //* Update member in Classroom
   const joinClass = (e) => {
     axios
-      .post("http://localhost:5000/classroom/update/" + id, classroom)
+      .post("http://goroom.herokuapp.com/classroom/update/" + id, classroom)
       .catch((err) => console.log(err));
     history.push('/h/:{id}/feed');
   }

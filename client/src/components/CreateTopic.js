@@ -36,7 +36,7 @@ function CreateTopic(props) {
     const newTopic = topic;
     console.log(newTopic);
     axios
-      .post("http://localhost:5000/topics/add", newTopic)
+      .post("http://goroom.herokuapp.com/topics/add", newTopic)
       .then((res) => console.log(res.data))
       .catch((err) => console.log(err));
     console.log("Create a new topic successful");

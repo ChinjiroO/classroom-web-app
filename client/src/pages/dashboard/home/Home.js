@@ -14,7 +14,7 @@ function Home() {
     const fetchData = async () => {
       setIsLoading(true);
       const res = await axios
-        .get("http://localhost:5000/classroom/" + user.result.googleId)
+        .get("http://goroom.herokuapp.com/classroom/" + user.result.googleId)
         .catch((error) => console.log(error));
       setClassrooms(res.data);
       setIsLoading(false);
@@ -25,13 +25,13 @@ function Home() {
   useEffect(() => {
     const postUser = async () => {
       const res = await axios
-        .post("http://localhost:5000/user/add", user.result)
+        .post("http://goroom.herokuapp.com/user/add", user.result)
         .then((res) => console.log(res.data))
         .catch((err) => console.error(err));
     };
     const getOneUser = async () => {
       const resU = await axios
-        .get("http://localhost:5000/user/" + user.result.googleId)
+        .get("http://goroom.herokuapp.com/user/" + user.result.googleId)
         .catch((err) => console.log(err));
       // console.log(resU);
       if (resU.data == null) {
