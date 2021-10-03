@@ -9,7 +9,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node ./server/app.js",
     "start:dev": "nodemon ./server/app.js",
-    "build": "NPM_CONFIG_PRODUCTION=false cd client/ && npm install && npm run build"
+    "build": "cd client/ && npm install && npm run build"
   },
   "author": "",
   "license": "ISC",

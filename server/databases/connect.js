@@ -1,25 +1,25 @@
 const { MongoClient } = require("mongodb");
-// const mongoose = require("mongoose");
-const Db = "mongodb+srv://chinjiro:Chinchin1452@cluster0.aj7dr.mongodb.net/go_room?retryWrites=true&w=majority";
-const client = new MongoClient(Db, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
+const MONGODB_URI =
+  "mongodb+srv://chinjiro:Chinchin1452@cluster0.aj7dr.mongodb.net/go_room?retryWrites=true&w=majority";
+const client = new MongoClient(MONGODB_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
 });
-
+const uri = process.env.MONGODB_URI;
 var _db;
 
 module.exports = {
-    connectToServer: function (callback) {
-        client.connect (function (err,db) {
-            if (db) {
-                _db = db.db("go_room");
-                console.log("Succesfully connected to MongoDB.");
-            }
-            return callback(err);
-        });
-    },
+  connectToServer: function (callback) {
+    client.connect(function (err, db) {
+      if (db) {
+        _db = db.db("go_room");
+        console.log("Succesfully connected to MongoDB.");
+      }
+      return callback(err);
+    });
+  },
 
-    getDb: function () {
-        return _db;
-    },
+  getDb: function () {
+    return _db;
+  },
 };

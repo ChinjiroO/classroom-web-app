@@ -1,26 +1,16 @@
 const express = require("express");
 const cors = require("cors");
 const path = require("path");
-
+const uri = process.env.MONGODB_URI;
 const PORT = process.env.PORT || 9000;
 const app = express();
 const dbo = require("./databases/connect");
-
-app.use(express.json());
 app.use(cors());
-app.use(express.urlencoded({ extended: false }));
-
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join("../client/build")));
-
-  app.get("*", function (request, response) {
-    response.sendFile(path.join(__dirname, "../client/build", "index.html"));
-  });
-}
-
 app.use(require("./routes/classroom"));
 app.use(require("./routes/user"));
 app.use(require("./routes/topics"));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
 app.listen(PORT, () => {
   // perform a database connection when server starts
