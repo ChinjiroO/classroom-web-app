@@ -22,7 +22,7 @@ topicRoutes.route("/topics/add").post(function (req, res) {
   });
 });
 //* -----------Fetch All Topics -----------
-classroomRoutes.route("/topics").get(function (req, res) {
+topicRoutes.route("/topics").get(function (req, res) {
   let db_connect = dbo.getDb("go_room");
   db_connect
       .collection("topics")
