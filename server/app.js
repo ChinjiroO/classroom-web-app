@@ -8,6 +8,13 @@ const dbo = require("./databases/connect");
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.resolve(__dirname, '../client/build')));
+  app.use(require("./routes/classroom"));
+  app.use(require("./routes/user"));
+  app.use(require("./routes/topics"));
+
+  app.use(cors());
+  app.use(express.json());
+  app.use(express.urlencoded({ extended: false }));
 }
 
 app.use(require("./routes/classroom"));
