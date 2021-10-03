@@ -21,7 +21,7 @@ export default class MaterialList extends Component {
     // This method will get the data from the database.
     componentDidMount() {
         axios
-        .get("http://localhost:9000/materials")
+        .get("http://localhost:5000/materials")
         .then((res) => {
             this.setState({ materials: res.data });
         })

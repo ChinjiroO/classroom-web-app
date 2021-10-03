@@ -35,7 +35,7 @@ function CreateModal(props) {
   const onCreate = (e) => {  
     e.preventDefault();    
     axios
-      .post("http://localhost:9000/classroom/add", classRoom)
+      .post("http://localhost:5000/classroom/add", classRoom)
       .then((res) => console.log(res.data));    
     console.log("Create a new classroom successful"); 
     const _id = classRoom._id;

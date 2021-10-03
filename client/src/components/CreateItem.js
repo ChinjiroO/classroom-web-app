@@ -21,7 +21,7 @@ const CreateItem = (props) => {
   useEffect(() => {
     const getTopic = async () => {
       const res = await axios
-        .get("http://localhost:9000/topics/" + id)
+        .get("http://localhost:5000/topics/" + id)
         .catch((err) => console.log(err));
       // setID(res.data[0]._id.toString());
       setTopics(res.data);
