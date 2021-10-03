@@ -5,14 +5,18 @@ const path = require("path");
 const PORT = process.env.PORT || 5000;
 const app = express();
 const dbo = require("./databases/connect");
-
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.resolve(__dirname, '../client/build')));
-}
-
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, '../client/build')));
+
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, '../client/build/index.html'))
+  })
+}
+
 
 app.use(require("./routes/classroom"));
 app.use(require("./routes/user"));
