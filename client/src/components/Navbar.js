@@ -150,14 +150,14 @@ const Navbar = () => {
               </Sbutton>
             </OverlayTrigger>
 
-            <Sbutton onClick={logout}>
-              <Simage
-                fluid
-                roundedCircle
-                src={user?.result.imageUrl}
-                alt={user?.result.name}
-              />
-            </Sbutton>
+            <OverlayTrigger
+              placement="bottom"
+              overlay={<Tooltip>Logout</Tooltip>}
+            >
+              <Sbutton onClick={logout}>
+                <Simage fluid roundedCircle src={user?.result.imageUrl} />
+              </Sbutton>
+            </OverlayTrigger>
           </SiNav>
 
           {/*//! OffCanvas */}

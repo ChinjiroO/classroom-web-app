@@ -40,9 +40,8 @@ function CreateModal(props) {
     console.log("Create a new classroom successful"); 
     const _id = classRoom._id;
     console.log(_id); 
-    // history.push(`/h`);
-    setTimeout(() => window.location.reload(), 100);
-    history.push(`/h/${_id}/feed`);
+    setTimeout(() => window.location.reload(), 1000);
+    // history.push(`/h/${_id}/feed`);
       
   };
   

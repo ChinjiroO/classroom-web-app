@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import ClassroomCard, { Scard } from "../../../components/ClassroomCard";
+import ClassroomCard, { Mcard } from "../../../components/ClassroomCard";
 import Navbar from "../../../components/Navbar";
 import { Scontainer } from "./Styled";
 import { Placeholder, Card } from "react-bootstrap";
@@ -43,13 +43,13 @@ function Home() {
     getOneUser();
   }, []);
   //! Delete classrooms
-
+  
   return (
     <div>
       <Navbar/>
       {isLoading ? (
         <Scontainer fluid>
-          <Scard>
+          <Mcard>
             <Card.Body>
               <Placeholder as={Card.Title} animation="glow">
                 <Placeholder xs={11} />
@@ -60,7 +60,7 @@ function Home() {
 							<br/>
 							<br/>
             </Card.Body>
-          </Scard>
+          </Mcard>
         </Scontainer>
       ) : (
         <Scontainer fluid>
@@ -70,6 +70,7 @@ function Home() {
               nameOfClass={items.nameOfClass}
               subject={items.subject}
               _id={items._id}
+              leader={items.leader}
             />
           ))}
         </Scontainer>

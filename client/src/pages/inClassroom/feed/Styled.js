@@ -86,6 +86,7 @@ export const IcardTitle = styled(Card.Title)`
 export const IcardDescription = styled(Card.Text)`
   font-size: small;
   color: #5b6d94;
+  white-space: pre;
 `;
 export const ItemsContainer = styled(Container)`
   display: flex;
