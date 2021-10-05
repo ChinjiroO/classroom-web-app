@@ -42,11 +42,10 @@ function Home() {
     };
     getOneUser();
   }, []);
-  //! Delete classrooms
-  
+
   return (
     <div>
-      <Navbar/>
+      <Navbar />
       {isLoading ? (
         <Scontainer fluid>
           <Mcard>
@@ -57,8 +56,26 @@ function Home() {
               <Placeholder as={Card.Text} animation="glow">
                 <Placeholder xs={4} />
               </Placeholder>
-							<br/>
-							<br/>
+              <br />
+              <br />
+              <br />
+              <br />
+              <br />
+            </Card.Body>
+          </Mcard>
+          <Mcard>
+            <Card.Body>
+              <Placeholder as={Card.Title} animation="glow">
+                <Placeholder xs={11} />
+              </Placeholder>
+              <Placeholder as={Card.Text} animation="glow">
+                <Placeholder xs={4} />
+              </Placeholder>
+              <br />
+              <br />
+              <br />
+              <br />
+              <br />
             </Card.Body>
           </Mcard>
         </Scontainer>
@@ -71,6 +88,7 @@ function Home() {
               subject={items.subject}
               _id={items._id}
               leader={items.leader}
+              room={items.room}
             />
           ))}
         </Scontainer>

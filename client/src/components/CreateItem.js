@@ -40,8 +40,18 @@ const CreateItem = (props) => {
       </Modal.Header>
       <Modal.Body>
         <Form>
-          <FloatingLabel controlId="" label="Email address" className="mb-3">
-            <Form.Control placeholder="" />
+        <FloatingLabel
+            controlId="Title"
+            label="Title"
+            className="mb-3"
+          >
+            <Form.Control
+              // defaultValue={topic.title}
+              // onChange={onChangeTitle}
+              type="text"
+              placeholder="Title"
+              required={true}
+            />
           </FloatingLabel>
           <Form.Group className="mb-3">
             <FloatingLabel controlId="floatingTextarea2" label="Comments">

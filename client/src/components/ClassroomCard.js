@@ -14,7 +14,7 @@ import axios from "axios";
 
 const ClassroomCard = (props) => {
   const localGid = JSON.parse(localStorage.getItem("profile")).result.googleId;
-  const { nameOfClass, _id, subject, leader } = props;
+  const { nameOfClass, _id, subject, leader, room } = props;
   const [anchorEl, setAnchorEl] = useState(null);
 
   const open = Boolean(anchorEl);
@@ -30,10 +30,13 @@ const ClassroomCard = (props) => {
   };
   //! Delete classrooms & topics
   const handleDel = (e) => {
+    // let Accepts;
+    // if(Accepts == true)
     axios
       .delete("https://goroom.herokuapp.com/classroom/del/" + _id)
       .then((res) => console.log(res.status))
       .catch((err) => console.err(err));
+    axios.delete("https://goroom.herokuapp.com/topics/del/cid/" + _id);
     reloads();
   };
   // console.log(localGid);
@@ -46,7 +49,8 @@ const ClassroomCard = (props) => {
           <Slink to={`/h/${_id}/feed`}>
             <CardContent>
               <Mtypography>{nameOfClass}</Mtypography>
-              <br />
+              <Mstypography>{subject}</Mstypography>
+              <Mstypography>{room}</Mstypography>
               <br />
               <br />
               <br />
@@ -80,7 +84,7 @@ const ClassroomCard = (props) => {
                   }}
                 >
                   {leader === localGid ? (
-                    <MenuItem onClick={handleDel}>Delete{_id}</MenuItem>
+                    <MenuItem onClick={handleDel}>Delete</MenuItem>
                   ) : (
                     <MenuItem>Leave</MenuItem>
                   )}
@@ -137,6 +141,22 @@ export const Mtypography = styled(Typography)`
     font-size: larger;
     font-weight: bold;
     font-family: "Noto Sans Thai", sans-serif;
+    color: black;
+    /* width: 80%; */
+  }
+`;
+export const Mstypography = styled(Typography)`
+  && {
+    max-width: 14rem;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-size: larger;
+    font-family: "Noto Sans Thai", sans-serif;
+    color: black;
+    &:hover {
+      color: black;
+    }
     /* width: 80%; */
   }
 `;

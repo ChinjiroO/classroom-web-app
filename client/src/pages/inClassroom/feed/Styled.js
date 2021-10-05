@@ -46,9 +46,7 @@ export const Bcard = styled(Card)`
   padding: 1.5rem;
   border: none;
   border-radius: 1rem;
-  box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px,
-    rgba(0, 0, 0, 0.1) 0px 2px 4px 0px,
-    rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
+  box-shadow: rgba(9, 30, 66, 0.25) 0px 1px 1px, rgba(9, 30, 66, 0.13) 0px 0px 1px 1px;
   `
 export const BcardContent = styled(Card)`
   background-color: transparent;
@@ -82,11 +80,15 @@ export const IcardTitle = styled(Card.Title)`
   color: #0d2862;
   font-size: medium;
   margin: 0 0 0;
+  &.div {
+    display: flex;
+    justify-content: space-between;
+  }
 `;
 export const IcardDescription = styled(Card.Text)`
   font-size: small;
-  color: #5b6d94;
-  white-space: pre;
+  white-space: pre-line;
+  font-size: medium;
 `;
 export const ItemsContainer = styled(Container)`
   display: flex;
