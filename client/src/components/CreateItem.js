@@ -87,4 +87,5 @@ export default CreateItem;
 
 export const Sbutton = styled(Button)`
   box-sizing: content-box;
+  color: black;
 `;
