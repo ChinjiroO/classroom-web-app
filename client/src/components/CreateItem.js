@@ -21,7 +21,7 @@ const CreateItem = (props) => {
   useEffect(() => {
     const getTopic = async () => {
       const res = await axios
-        .get("http://localhost:9000/topics/" + id)
+        .get("https://goroom.herokuapp.com/topics/" + id)
         .catch((err) => console.log(err));
       // setID(res.data[0]._id.toString());
       setTopics(res.data);
@@ -40,8 +40,18 @@ const CreateItem = (props) => {
       </Modal.Header>
       <Modal.Body>
         <Form>
-          <FloatingLabel controlId="" label="Email address" className="mb-3">
-            <Form.Control placeholder="" />
+        <FloatingLabel
+            controlId="Title"
+            label="Title"
+            className="mb-3"
+          >
+            <Form.Control
+              // defaultValue={topic.title}
+              // onChange={onChangeTitle}
+              type="text"
+              placeholder="Title"
+              required={true}
+            />
           </FloatingLabel>
           <Form.Group className="mb-3">
             <FloatingLabel controlId="floatingTextarea2" label="Comments">
@@ -77,4 +87,5 @@ export default CreateItem;
 
 export const Sbutton = styled(Button)`
   box-sizing: content-box;
+  color: black;
 `;

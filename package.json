@@ -21,12 +21,13 @@
     "express": "^4.17.1",
     "express-session": "^1.17.2",
     "mongodb": "^4.1.2",
+    "mongoose": "^6.0.8",
     "passport": "^0.4.1",
     "passport-google-oauth20": "^2.0.0"
   },
   "repository": {
     "type": "git",
-    "url": "https://git.heroku.com/gr-classroom-web.git"
+    "url": "https://git.heroku.com/goroom.git"
   },
   "devDependencies": {},
   "keywords": [],

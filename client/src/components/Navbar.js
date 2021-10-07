@@ -75,7 +75,7 @@ const Navbar = () => {
     const fetchData = async () => {
       setIsLoading(true);
       const res = await axios
-        .get("http://localhost:9000/classroom/" + user.result.googleId)
+        .get("https://goroom.herokuapp.com/classroom/" + user.result.googleId)
         .catch((error) => console.log(error));
 
       setClassrooms(res.data);
@@ -150,14 +150,14 @@ const Navbar = () => {
               </Sbutton>
             </OverlayTrigger>
 
-            <Sbutton onClick={logout}>
-              <Simage
-                fluid
-                roundedCircle
-                src={user?.result.imageUrl}
-                alt={user?.result.name}
-              />
-            </Sbutton>
+            <OverlayTrigger
+              placement="bottom"
+              overlay={<Tooltip>Logout</Tooltip>}
+            >
+              <Sbutton onClick={logout}>
+                <Simage fluid roundedCircle src={user?.result.imageUrl} />
+              </Sbutton>
+            </OverlayTrigger>
           </SiNav>
 
           {/*//! OffCanvas */}

@@ -79,7 +79,7 @@ classroomRoutes.route("/classroom/del/:id").delete(function (req, res) {
   db_connect.collection("classrooms").deleteOne(query, function (err, obj) {
     if (err) throw err;
     console.log("1 document deleted");
-    response.status(obj);
+    res.status(obj);
   });
 });
 

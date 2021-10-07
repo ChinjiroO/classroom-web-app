@@ -29,6 +29,8 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
 import LibraryBooksIcon from "@mui/icons-material/LibraryBooks";
+import { IconButton } from "@mui/material";
+import MoreVert from "@mui/icons-material/MoreVert";
 
 function Feed() {
   let { id } = useParams();
@@ -37,7 +39,7 @@ function Feed() {
   const [isLoading, setIsLoading] = useState(false);
   const [topics, setTopics] = useState([]);
   const [ID, setID] = useState("");
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
   const [modal, setModal] = useState(false);
   const [itemModal, setItemModal] = useState(false);
 
@@ -62,7 +64,7 @@ function Feed() {
     const getClassroomData = async () => {
       setIsLoading(true);
       const res = await axios
-        .get("http://localhost:9000/classroom/id/" + id)
+        .get("https://goroom.herokuapp.com/classroom/id/" + id)
         .catch((error) => console.log(error));
       console.log(id);
       setClassroom(res.data);
@@ -75,9 +77,8 @@ function Feed() {
   useEffect(() => {
     const getTopic = async () => {
       const res = await axios
-        .get("http://localhost:9000/topics/" + id)
+        .get("https://goroom.herokuapp.com/topics/" + id)
         .catch((err) => console.log(err));
-      // setID(res.data[0]._id.toString());
       setTopics(res.data);
       return res;
     };
@@ -130,10 +131,7 @@ function Feed() {
                       ITEM
                     </MenuItem>
                   </Menu>
-                  <CreateTopic 
-                    show={modal} 
-                    onHide={() => setModal(false)} 
-                  />
+                  <CreateTopic show={modal} onHide={() => setModal(false)} />
                   <CreateItem
                     show={itemModal}
                     onHide={() => setItemModal(false)}
@@ -163,8 +161,21 @@ function Feed() {
                         {topic.items.map((item) => (
                           <Icard>
                             <IcardTitle>
-                              <FaBook color="#000" size="2rem" />
-                              {item.Ititle == "" ? "" : item.Ititle}
+                              <Row>
+                                <Col>
+                                <MiconButton>
+                                  <LibraryBooksIcon
+                                    style={{ color: "white" }}
+                                  />
+                                </MiconButton>
+                                {item.Ititle == "" ? "" : item.Ititle}
+                                </Col>
+                                <Col xs="auto">
+                                <IconButton>
+                                  <MoreVert />
+                                </IconButton>
+                                </Col>
+                              </Row>
                             </IcardTitle>
                             <hr />
                             <IcardDescription>
@@ -217,5 +228,16 @@ export const BnavLink = styled(Nav.Link)`
   color: #0d2862;
   &:hover {
     color: #5b6d94;
+  }
+`;
+export const MiconButton = styled(IconButton)`
+  && {
+    background-color: rgba(0, 102, 221);
+    margin-right: 0.75rem;
+    &:hover {
+      background-color: rgba(0, 102, 221);
+      cursor: default;
+      color: white;
+    }
   }
 `;

@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import ClassroomCard, { Scard } from "../../../components/ClassroomCard";
+import ClassroomCard, { Mcard } from "../../../components/ClassroomCard";
 import Navbar from "../../../components/Navbar";
 import { Scontainer } from "./Styled";
 import { Placeholder, Card } from "react-bootstrap";
@@ -14,7 +14,7 @@ function Home() {
     const fetchData = async () => {
       setIsLoading(true);
       const res = await axios
-        .get("http://localhost:9000/classroom/" + user.result.googleId)
+        .get("https://goroom.herokuapp.com/classroom/" + user.result.googleId)
         .catch((error) => console.log(error));
       setClassrooms(res.data);
       setIsLoading(false);
@@ -25,13 +25,13 @@ function Home() {
   useEffect(() => {
     const postUser = async () => {
       const res = await axios
-        .post("http://localhost:9000/user/add", user.result)
+        .post("https://goroom.herokuapp.com/user/add", user.result)
         .then((res) => console.log(res.data))
         .catch((err) => console.error(err));
     };
     const getOneUser = async () => {
       const resU = await axios
-        .get("http://localhost:9000/user/" + user.result.googleId)
+        .get("https://goroom.herokuapp.com/user/" + user.result.googleId)
         .catch((err) => console.log(err));
       // console.log(resU);
       if (resU.data == null) {
@@ -42,14 +42,13 @@ function Home() {
     };
     getOneUser();
   }, []);
-  //! Delete classrooms
 
   return (
     <div>
-      <Navbar/>
+      <Navbar />
       {isLoading ? (
         <Scontainer fluid>
-          <Scard>
+          <Mcard>
             <Card.Body>
               <Placeholder as={Card.Title} animation="glow">
                 <Placeholder xs={11} />
@@ -57,10 +56,28 @@ function Home() {
               <Placeholder as={Card.Text} animation="glow">
                 <Placeholder xs={4} />
               </Placeholder>
-							<br/>
-							<br/>
+              <br />
+              <br />
+              <br />
+              <br />
+              <br />
             </Card.Body>
-          </Scard>
+          </Mcard>
+          <Mcard>
+            <Card.Body>
+              <Placeholder as={Card.Title} animation="glow">
+                <Placeholder xs={11} />
+              </Placeholder>
+              <Placeholder as={Card.Text} animation="glow">
+                <Placeholder xs={4} />
+              </Placeholder>
+              <br />
+              <br />
+              <br />
+              <br />
+              <br />
+            </Card.Body>
+          </Mcard>
         </Scontainer>
       ) : (
         <Scontainer fluid>
@@ -70,6 +87,8 @@ function Home() {
               nameOfClass={items.nameOfClass}
               subject={items.subject}
               _id={items._id}
+              leader={items.leader}
+              room={items.room}
             />
           ))}
         </Scontainer>
