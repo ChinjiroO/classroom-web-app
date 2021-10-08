@@ -15,14 +15,10 @@ import {
   Slink,
 } from "./Styled";
 
-export const LoginForm = (props) => {
+export const LoginForm = () => {
   const dispatch = useDispatch();
   const history = useHistory();
-  // const [user, setUser] = useState({
-  //   name: "",
-  //   email: "",
-  //   password: "",
-  // });
+
   //* Google Authentication
   const googleSuccess = async (res) => {
     const result = res?.profileObj;

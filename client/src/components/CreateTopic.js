@@ -1,13 +1,11 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Form, Modal, Button, FloatingLabel } from "react-bootstrap";
-import { useParams, useHistory } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { ObjectID } from "bson";
 
 function CreateTopic(props) {
-  const user = JSON.parse(localStorage.getItem("profile"));
   const { id } = useParams();
-  const history = useHistory();
   const [topic, setTopic] = useState({
     _id: ObjectID(),
     title: "",
@@ -20,13 +18,13 @@ function CreateTopic(props) {
       },
     ],
   });
-  let title, value;
+  let value;
+
   const reloads = () => {
     setTimeout(() => window.location.reload(), 500);
-  }
+  };
 
   const onChangeTitle = (e) => {
-    title = e.target.title;
     value = e.target.value;
     setTopic({ ...topic, title: value });
   };
@@ -55,11 +53,7 @@ function CreateTopic(props) {
       </Modal.Header>
       <Modal.Body>
         <Form onSubmit={onCreate}>
-          <FloatingLabel
-            controlId="Topic"
-            label="Topic"
-            className="mb-3"
-          >
+          <FloatingLabel controlId="Topic" label="Topic" className="mb-3">
             <Form.Control
               defaultValue={topic.title}
               onChange={onChangeTitle}
@@ -69,7 +63,7 @@ function CreateTopic(props) {
             />
           </FloatingLabel>
 
-          <Button type="submit" value="Submit" >
+          <Button type="submit" value="Submit">
             Submit
           </Button>
         </Form>

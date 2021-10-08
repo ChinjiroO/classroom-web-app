@@ -1,6 +1,6 @@
 import axios from "axios";
 import decode from "jwt-decode";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Container,
   DropdownButton,
@@ -43,13 +43,10 @@ const Navbar = () => {
   const [modal, setModal] = useState(false);
   const [classrooms, setClassrooms] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [open, setOpen] = useState(false);
 
   const history = useHistory();
   const dispatch = useDispatch();
   const location = useLocation();
-  const anchorRef = useRef(null);
-  const prevOpen = useRef(open);
 
   const handleActive = () => setActive(true);
   const handleInactive = () => setActive(false);
@@ -83,36 +80,6 @@ const Navbar = () => {
     };
     fetchData();
   }, []);
-
-  //* Menu Material UI
-  const handleToggle = () => {
-    setOpen((prevOpen) => !prevOpen);
-  };
-
-  const handleClose = (event) => {
-    if (anchorRef.current && anchorRef.current.contains(event.target)) {
-      return;
-    }
-
-    setOpen(false);
-  };
-
-  function handleListKeyDown(event) {
-    if (event.key === "Tab") {
-      event.preventDefault();
-      setOpen(false);
-    } else if (event.key === "Escape") {
-      setOpen(false);
-    }
-  }
-
-  React.useEffect(() => {
-    if (prevOpen.current === true && open === false) {
-      anchorRef.current.focus();
-    }
-
-    prevOpen.current = open;
-  }, [open]);
 
   return (
     <>

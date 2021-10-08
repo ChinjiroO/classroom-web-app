@@ -1,10 +1,8 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Card, Col, Nav, Row, Tab } from "react-bootstrap";
-import { FaBook } from "react-icons/fa";
 import { useParams } from "react-router-dom";
 import { ReactTinyLink } from "react-tiny-link";
-import styled from "styled-components";
 import { HCardFeed } from "../../../components/HCardFeed";
 import Navbar from "../../../components/Navbar";
 import CreateTopic from "../../../components/CreateTopic";
@@ -21,24 +19,24 @@ import {
   Scontainer,
   Sdiv,
   Srow,
+  MiconButton,
+  BnavLink,
+  Mbutton
 } from "./Styled";
 //*Matrial UI
+import { Menu, MenuItem, IconButton } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
-import Button from "@mui/material/Button";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
 import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
 import LibraryBooksIcon from "@mui/icons-material/LibraryBooks";
-import { IconButton } from "@mui/material";
 import MoreVert from "@mui/icons-material/MoreVert";
 
 function Feed() {
   let { id } = useParams();
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
+  const [user] = useState(JSON.parse(localStorage.getItem("profile")));
   const [classroom, setClassroom] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [topics, setTopics] = useState([]);
-  const [ID, setID] = useState("");
+  const [ID] = useState("");
   const [anchorEl, setAnchorEl] = useState(null);
   const [modal, setModal] = useState(false);
   const [itemModal, setItemModal] = useState(false);
@@ -88,9 +86,6 @@ function Feed() {
   return (
     <Sdiv>
       <Navbar />
-      {/* <Fab color="primary" aria-label="add">
-        <AddIcon />
-      </Fab> */}
       <Scontainer fluid>
         {/* //!Header */}
         {HCardFeed(isLoading, classroom)}
@@ -101,7 +96,7 @@ function Feed() {
         <Tab.Container fluid defaultActiveKey={ID}>
           <Srow>
             <Col md={3}>
-              {user.result.googleId == classroom.leader ? (
+              {user.result.googleId === classroom.leader ? (
                 <div>
                   <Mbutton
                     id="basic-button"
@@ -163,23 +158,23 @@ function Feed() {
                             <IcardTitle>
                               <Row>
                                 <Col>
-                                <MiconButton>
-                                  <LibraryBooksIcon
-                                    style={{ color: "white" }}
-                                  />
-                                </MiconButton>
-                                {item.Ititle == "" ? "" : item.Ititle}
+                                  <MiconButton>
+                                    <LibraryBooksIcon
+                                      style={{ color: "white" }}
+                                    />
+                                  </MiconButton>
+                                  {item.Ititle === "" ? "" : item.Ititle}
                                 </Col>
                                 <Col xs="auto">
-                                <IconButton>
-                                  <MoreVert />
-                                </IconButton>
+                                  <IconButton>
+                                    <MoreVert />
+                                  </IconButton>
                                 </Col>
                               </Row>
                             </IcardTitle>
                             <hr />
                             <IcardDescription>
-                              {item.description == "" ? "" : item.description}
+                              {item.description === "" ? "" : item.description}
                             </IcardDescription>
                             {item.attachments === "" ? (
                               <></>
@@ -209,35 +204,3 @@ function Feed() {
 }
 
 export default Feed;
-
-export const Mbutton = styled(Button)`
-  && {
-    margin-bottom: 1rem;
-    background-color: rgba(0, 102, 221);
-    color: #ffffff;
-    border-radius: 1.5rem;
-    font-weight: bold;
-    padding: 0.5rem 1.5rem;
-    &:hover {
-      color: #f8fafd;
-      background-color: rgba(92, 157, 233);
-    }
-  }
-`;
-export const BnavLink = styled(Nav.Link)`
-  color: #0d2862;
-  &:hover {
-    color: #5b6d94;
-  }
-`;
-export const MiconButton = styled(IconButton)`
-  && {
-    background-color: rgba(0, 102, 221);
-    margin-right: 0.75rem;
-    &:hover {
-      background-color: rgba(0, 102, 221);
-      cursor: default;
-      color: white;
-    }
-  }
-`;
