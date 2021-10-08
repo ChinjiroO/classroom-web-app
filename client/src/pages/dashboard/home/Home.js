@@ -6,7 +6,7 @@ import { Scontainer } from "./Styled";
 import { Placeholder, Card } from "react-bootstrap";
 
 function Home() {
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
+  const [user] = useState(JSON.parse(localStorage.getItem("profile")));
   const [classrooms, setClassrooms] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   //*get data from collection "classrooms"
@@ -24,7 +24,7 @@ function Home() {
   //*Check user if haven't in mongodb let will add them to mongodb
   useEffect(() => {
     const postUser = async () => {
-      const res = await axios
+      await axios
         .post("https://goroom.herokuapp.com/user/add", user.result)
         .then((res) => console.log(res.data))
         .catch((err) => console.error(err));
@@ -33,9 +33,8 @@ function Home() {
       const resU = await axios
         .get("https://goroom.herokuapp.com/user/" + user.result.googleId)
         .catch((err) => console.log(err));
-      // console.log(resU);
       if (resU.data == null) {
-        console.log("Fist time to come in this here.");
+        // console.log("Fist time to come in this here.");
         postUser();
         console.log("Add new user successful");
       }

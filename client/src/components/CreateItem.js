@@ -1,22 +1,13 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import {
-  Form,
-  Modal,
-  Button,
-  FloatingLabel,
-  CloseButton,
-} from "react-bootstrap";
-import { useParams, useHistory } from "react-router-dom";
-import { ObjectID } from "bson";
+import { Form, Modal, Button, FloatingLabel } from "react-bootstrap";
+import { useParams } from "react-router-dom";
 import styled from "styled-components";
 
 const CreateItem = (props) => {
   const { id } = useParams();
   const [topics, setTopics] = useState([]);
-  const [item, setItem] = useState({
-    _id: ObjectID(id),
-  });
+
   //* Get topics in current classroom
   useEffect(() => {
     const getTopic = async () => {
@@ -28,10 +19,10 @@ const CreateItem = (props) => {
       return res;
     };
     getTopic();
+  //! React hook useEffect has a missing dependency: 'id'.
   }, []);
 
-  //* Create a new Item
-  const onSubmit = async (e) => {};
+  //? Create a new Item
 
   return (
     <Modal {...props} fullscreen>
@@ -40,11 +31,7 @@ const CreateItem = (props) => {
       </Modal.Header>
       <Modal.Body>
         <Form>
-        <FloatingLabel
-            controlId="Title"
-            label="Title"
-            className="mb-3"
-          >
+          <FloatingLabel controlId="Title" label="Title" className="mb-3">
             <Form.Control
               // defaultValue={topic.title}
               // onChange={onChangeTitle}
@@ -70,7 +57,7 @@ const CreateItem = (props) => {
               <Form.Select aria-label="Floating label select example">
                 {topics.map((topic) => (
                   <option value={topic._id}>{topic.title}</option>
-                ))}                
+                ))}
               </Form.Select>
             </FloatingLabel>
           </Form.Group>

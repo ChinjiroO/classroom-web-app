@@ -1,4 +1,5 @@
 import { Card, Container, DropdownButton, Nav, NavItem, NavLink, Col, Row, Tab } from "react-bootstrap";
+import { Button, IconButton } from "@mui/material";
 import styled from "styled-components";
 
 export const Scontainer = styled(Container)`
@@ -106,4 +107,35 @@ export const Icol = styled(Col)`
   margin-bottom: 2rem;
   padding-right: 1rem;
   padding-left: 1rem;
+`;
+export const Mbutton = styled(Button)`
+  && {
+    margin-bottom: 1rem;
+    background-color: rgba(0, 102, 221);
+    color: #ffffff;
+    border-radius: 1.5rem;
+    font-weight: bold;
+    padding: 0.5rem 1.5rem;
+    &:hover {
+      color: #f8fafd;
+      background-color: rgba(92, 157, 233);
+    }
+  }
+`;
+export const BnavLink = styled(Nav.Link)`
+  color: #0d2862;
+  &:hover {
+    color: #5b6d94;
+  }
+`;
+export const MiconButton = styled(IconButton)`
+  && {
+    background-color: rgba(0, 102, 221);
+    margin-right: 0.75rem;
+    &:hover {
+      background-color: rgba(0, 102, 221);
+      cursor: default;
+      color: white;
+    }
+  }
 `;

@@ -1,6 +1,5 @@
-import React, { useState } from 'react'
-import styled from 'styled-components'
-import { Card, Container, Col, Row, Button } from 'react-bootstrap'
+import React from 'react'
+import { Card, Button } from 'react-bootstrap'
 import axios from 'axios'
 import Navbar from '../../../components/Navbar'
 import { useParams, useHistory } from 'react-router-dom'
